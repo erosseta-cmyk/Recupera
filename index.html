@@ -14,9 +14,9 @@
          (ej. https://recuperakine.github.io/). Mientras no esté publicada, se deja sin canonical. -->
     <!-- <link rel="canonical" href="https://kinerecupera.cl/"> -->
 
-    <!-- Favicon (emoji provisional; reemplazable por logo propio) -->
+    <!-- Favicon: monograma R de RECUPERA -->
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🩺</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230F2C59'/><text x='50' y='73' font-family='Poppins,Arial,sans-serif' font-size='64' font-weight='700' fill='white' text-anchor='middle'>R</text></svg>">
 
     <!-- Open Graph (al compartir en WhatsApp/Facebook) -->
     <meta property="og:type" content="website">
@@ -47,7 +47,7 @@
     {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cuánto cuesta la atención?", "acceptedAnswer": {"@type": "Answer", "text": "El valor depende del tipo de atención y de su comuna. Escríbanos por WhatsApp y le indicamos el valor de la evaluación inicial y de las sesiones, sin compromiso."}}, {"@type": "Question", "name": "¿Cuánto dura una sesión?", "acceptedAnswer": {"@type": "Answer", "text": "Cada sesión dura aproximadamente 45 minutos de dedicación exclusiva y personalizada para usted. Tenga en consideración que este tiempo puede variar según sus necesidades y cómo avance su tratamiento."}}, {"@type": "Question", "name": "¿Qué pasa en la primera visita?", "acceptedAnswer": {"@type": "Answer", "text": "¡Nos conocemos! Conversamos sobre su historial, hacemos algunas pruebas suaves de movilidad, definimos juntos sus objetivos y comenzamos con la primera intervención. Todo con calma y en la comodidad de su hogar."}}, {"@type": "Question", "name": "¿Atienden a adultos mayores?", "acceptedAnswer": {"@type": "Answer", "text": "¡Es una de nuestras especialidades! Trabajamos con cariño y mucha paciencia para ayudarle a mantener su independencia, mejorar el equilibrio y prevenir caídas, siempre a su ritmo."}}, {"@type": "Question", "name": "¿Me dan boleta para el reembolso?", "acceptedAnswer": {"@type": "Answer", "text": "¡Sí! Emitimos boleta de honorarios electrónica de salud, para que pueda gestionar su reembolso en Fonasa, Isapre o su seguro complementario sin complicaciones."}}, {"@type": "Question", "name": "¿Necesito preparar o comprar algo?", "acceptedAnswer": {"@type": "Answer", "text": "Para nada. Nosotros llevamos todo lo necesario hasta su puerta. Usted solo necesita ropa cómoda y un pequeño espacio tranquilo; del resto nos encargamos nosotros."}}]}
     </script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://app.cal.com">
@@ -65,6 +65,8 @@
             --ok: #1B7A3D;
             --border: #C7D2DE;
             --radius: 14px;
+            --brand-green: #2E9E5B;   /* verde de marca: logo + boton Agendar */
+            --brand-green-d: #25804A;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -164,7 +166,7 @@
         .mobile-menu .mm-cta .ic { color: #fff; }
         @media (min-width: 769px){ .mobile-menu { display: none !important; } }
 
-        /* ===== Quién te atenderá ===== */
+        /* ===== Quién te atiende ===== */
         .pro { background: var(--light-bg); }
         .pro-card { max-width: 920px; margin: 30px auto 0; background: var(--white); border-radius: 22px; overflow: hidden; box-shadow: 0 14px 40px rgba(15,44,89,0.12); border: 1px solid #E4EAF2; display: grid; grid-template-columns: 300px 1fr; }
         .pro-photo { background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; position: relative; min-height: 340px; }
@@ -207,13 +209,14 @@
             background: var(--primary);
             color: var(--white);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             gap: 14px;
-            padding: 12px 5%;
+            padding: 10px 5%;
             font-size: 1rem;
             flex-wrap: wrap;
         }
+        .fs-controls { display: flex; gap: 12px; align-items: center; }
         .access-bar span { opacity: 0.95; font-weight: 500; }
         .access-bar button {
             background: rgba(255,255,255,0.18);
@@ -233,7 +236,7 @@
         /* ===== Navbar ===== */
         nav {
             background: var(--white);
-            padding: 16px 5%;
+            padding: 6px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -243,7 +246,11 @@
             z-index: 900;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
         }
-        .logo { font-weight: 700; font-size: 1.5rem; color: var(--primary); letter-spacing: 1px; text-decoration: none; }
+        .logo { display: inline-flex; align-items: center; text-decoration: none; }
+        .logo svg { height: 54px; width: auto; display: block; }
+        .mm-logo svg, .footer-logo svg { width: auto; display: block; }
+        .mm-logo svg { height: 34px; }
+        .footer-logo svg { height: 44px; margin-bottom: 8px; }
         .nav-links { display: flex; list-style: none; gap: 22px; align-items: center; }
         .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.3s; }
 
@@ -261,7 +268,7 @@
             text-align: center;
             box-shadow: 0 4px 14px rgba(0,0,0,0.10);
         }
-        .btn-primary { background-color: var(--secondary); color: var(--white); }
+        .btn-primary { background-color: var(--brand-green); color: var(--white); }
         .btn-secondary { background-color: transparent; color: var(--white); border: 2px solid var(--white); }
         .btn-wa { background-color: var(--whatsapp); color: var(--white); }
         .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
@@ -716,7 +723,8 @@
             .nav-links { display: flex; gap: 8px; margin-left: auto; }
             .nav-section { display: none; }
             .nav-wa { display: none; }
-            .logo { font-size: 1.2rem; flex-shrink: 0; }
+            .logo { flex-shrink: 0; }
+            .logo svg { height: 42px; }
             .cta-extra { display: none; }
             .nav-cta a { padding: 10px 14px !important; font-size: 0.95rem; white-space: nowrap; }
 
@@ -819,7 +827,7 @@
         .access-bar button:hover, .access-bar button.active { background: var(--secondary); border-color: var(--white); }
         .nav-links a:hover { color: var(--secondary); }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.18); }
-        .btn-primary:hover { background-color: var(--primary); }
+        .btn-primary:hover { background-color: var(--brand-green-d); }
         .btn-secondary:hover { background-color: var(--white); color: var(--primary); }
         .btn-wa:hover { background-color: #168a45; }
         .about-card:hover { transform: translateY(-10px); box-shadow: 0 20px 44px rgba(15,44,89,0.18); }
@@ -869,13 +877,15 @@
     <!-- Barra de accesibilidad: tamaño de letra -->
     <div class="access-bar">
         <span><svg class="ic" aria-hidden="true"><use xlink:href="#i-type" href="#i-type"></use></svg> ¿Le cuesta leer? Agrande el texto:</span>
-        <button class="a1 active" onclick="setFont(this,19)" aria-label="Letra normal">A</button>
-        <button class="a2" onclick="setFont(this,23)" aria-label="Letra grande">A+</button>
-        <button class="a3" onclick="setFont(this,27)" aria-label="Letra muy grande">A++</button>
+        <div class="fs-controls">
+            <button class="a1 active" onclick="setFont(this,19)" aria-label="Letra normal">A</button>
+            <button class="a2" onclick="setFont(this,23)" aria-label="Letra grande">A+</button>
+            <button class="a3" onclick="setFont(this,27)" aria-label="Letra muy grande">A++</button>
+        </div>
     </div>
 
     <nav>
-        <a href="#v-inicio" class="logo">RECUPERA</a>
+        <a href="#v-inicio" class="logo" aria-label="RECUPERA, ir al inicio"><svg viewBox="0 0 196 46" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kine Recupera"><text x="2" y="44" style="font-family:'Poppins',Arial,sans-serif" font-weight="700" font-size="27" fill="#0F2C59" textLength="192" lengthAdjust="spacingAndGlyphs">RECUPERA</text><text x="9" y="26" style="font-family:'Caveat','Brush Script MT',cursive" font-weight="700" font-size="33" fill="#2E9E5B">Kine</text></svg></a>
         <ul class="nav-links">
             <li class="nav-section"><a href="#v-inicio" data-vista="inicio">Inicio</a></li>
             <li class="nav-section"><a href="#v-profesional" data-vista="profesional">Quién te atiende</a></li>
@@ -892,7 +902,7 @@
     <!-- Menú móvil: pantalla completa (robusto en iOS/Android) -->
     <div class="mobile-menu" id="menu">
         <div class="mm-header">
-            <span class="mm-logo">RECUPERA</span>
+            <span class="mm-logo"><svg viewBox="0 0 196 46" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kine Recupera"><text x="2" y="44" style="font-family:'Poppins',Arial,sans-serif" font-weight="700" font-size="27" fill="#0F2C59" textLength="192" lengthAdjust="spacingAndGlyphs">RECUPERA</text><text x="9" y="26" style="font-family:'Caveat','Brush Script MT',cursive" font-weight="700" font-size="33" fill="#2E9E5B">Kine</text></svg></span>
             <a class="mm-close" href="#cerrar" role="button" aria-label="Cerrar menú"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
         </div>
         <a href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-home" href="#i-home"></use></svg> Inicio</a>
@@ -904,7 +914,7 @@
         <a href="#v-zonas"><svg class="ic" aria-hidden="true"><use xlink:href="#i-pin" href="#i-pin"></use></svg> Zonas de atención</a>
         <a href="#v-faq"><svg class="ic" aria-hidden="true"><use xlink:href="#i-help" href="#i-help"></use></svg> Preguntas frecuentes</a>
         <a class="mm-wa" href="https://wa.me/56979728587?text=Hola,%20quiero%20agendar%20una%20evaluación%20kinésica%20a%20domicilio%20con%20RECUPERA." target="_blank" rel="noopener" onclick="cerrarMenu()"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Escribir por WhatsApp</a>
-        <a class="mm-cta" href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" onclick="cerrarMenu();abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar mi hora</a>
+        <a class="mm-cta" href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" onclick="cerrarMenu();abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar hora</a>
     </div>
 
     <span id="contenido" tabindex="-1"></span>
@@ -916,8 +926,7 @@
             <p>Kinesiología a domicilio en Santiago. Profesional, cercana y a su ritmo.</p>
             <div class="hero-buttons">
                 <a href="https://wa.me/56979728587?text=Hola,%20quiero%20agendar%20una%20evaluación%20kinésica%20a%20domicilio%20con%20RECUPERA." target="_blank" rel="noopener" class="btn btn-wa hero-cta-main"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Hablar por WhatsApp</a>
-                <a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" onclick="abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar mi hora</a>
-                <a href="tel:+56979728587" class="btn btn-secondary"><svg class="ic" aria-hidden="true"><use xlink:href="#i-phone" href="#i-phone"></use></svg> Llamar ahora</a>
+                <a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" onclick="abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar hora</a>
             </div>
             <p class="hero-reassure"><svg class="ic" aria-hidden="true"><use xlink:href="#i-bolt" href="#i-bolt"></use></svg> Respuesta rápida por WhatsApp · Sin salas de espera · Atendido por Esteban Rosset, kinesiólogo</p>
         </div>
@@ -937,21 +946,20 @@
     <!-- ====================== Resto del sitio ====================== -->
 
     <div class="home-tiles-wrap">
-        <h2 class="home-tiles-title">¿Qué desea ver?</h2>
+        <h2 class="home-tiles-title">Información sobre RECUPERA</h2>
         <div class="home-tiles">
             <a class="tile" href="#v-profesional"><span class="t-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-user" href="#i-user"></use></svg></span><span class="t-tx"><b>Quién te atiende</b><span>Conoce al profesional</span></span></a>
             <a class="tile" href="#v-servicios"><span class="t-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-heart" href="#i-heart"></use></svg></span><span class="t-tx"><b>Servicios</b><span>Qué tratamos y cómo</span></span></a>
             <a class="tile" href="#v-comofunciona"><span class="t-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-route" href="#i-route"></use></svg></span><span class="t-tx"><b>Cómo funciona</b><span>La atención paso a paso</span></span></a>
-            <a class="tile" href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" onclick="abrirAgendar();return false;"><span class="t-ic" style="background:linear-gradient(135deg,var(--whatsapp),#168a45)"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg></span><span class="t-tx"><b>Agendar mi hora</b><span>Reserve en línea</span></span></a>
+            <a class="tile" href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" onclick="abrirAgendar();return false;"><span class="t-ic" style="background:linear-gradient(135deg,var(--whatsapp),#168a45)"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg></span><span class="t-tx"><b>Agendar hora</b><span>Reserve en línea</span></span></a>
         </div>
     </div>
     </div>
 
     <div class="vista" id="v-servicios">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
     <section id="servicios">
-        <h2 class="section-title reveal">Nuestros Servicios</h2>
-        <p class="section-subtitle">Toque cualquier servicio para ver una explicación sencilla y un ejemplo.</p>
+        <h2 class="section-title reveal">Servicios</h2>
+        <p class="section-subtitle">Los servicios a los que podrá acceder son:</p>
         <div class="grid">
             <a class="card service reveal" href="#serv-musculo" onclick="abrirServicio('musculo');return false;">
                 <svg class="ic" aria-hidden="true"><use xlink:href="#i-bone" href="#i-bone"></use></svg><h3>Kinesiología Musculoesquelética</h3>
@@ -994,7 +1002,6 @@
     </div>
 
     <div class="vista" id="v-comofunciona">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
     <section id="como-funciona" class="steps">
         <h2 class="section-title reveal">¿Cómo Funciona el Servicio?</h2>
         <p class="flow-hint reveal">Así es la atención de RECUPERA en su hogar, paso a paso.</p>
@@ -1002,7 +1009,7 @@
             <div class="flow-list">
                 <div class="flow-row">
                     <div class="fr-circle"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg><span class="n">1</span></div>
-                    <div><h3>Agende su hora</h3><p>Elija servicio, día y hora tocando “Agendar hora”. O escríbanos por WhatsApp y lo coordinamos por usted.</p></div>
+                    <div><h3>Agende su hora</h3><p>Elija servicio, día y hora en “Agendar hora”. O escríbanos por WhatsApp y lo coordinamos con usted.</p></div>
                 </div>
                 <div class="flow-row">
                     <div class="fr-circle"><svg class="ic" aria-hidden="true"><use xlink:href="#i-home" href="#i-home"></use></svg><span class="n">2</span></div>
@@ -1010,7 +1017,7 @@
                 </div>
                 <div class="flow-row">
                     <div class="fr-circle"><svg class="ic" aria-hidden="true"><use xlink:href="#i-clipboard" href="#i-clipboard"></use></svg><span class="n">3</span></div>
-                    <div><h3>Plan a su medida</h3><p>Diseñamos un plan de sesiones a su medida: su ritmo, sus tiempos y sus metas.</p></div>
+                    <div><h3>Plan a su medida</h3><p>Diseñamos un plan de sesiones a su medida, su ritmo, sus tiempos y sus metas.</p></div>
                 </div>
                 <div class="flow-row">
                     <div class="fr-circle"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chart" href="#i-chart"></use></svg><span class="n">4</span></div>
@@ -1019,7 +1026,7 @@
             </div>
 
             <div class="flow-cta">
-                <a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" onclick="abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar mi hora ahora</a>
+                <a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" onclick="abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar hora</a>
             </div>
         </div>
     </section>
@@ -1027,7 +1034,6 @@
     </div>
 
     <div class="vista" id="v-beneficios">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
     <section id="beneficios">
         <h2 class="section-title reveal">¿Por qué elegirnos?</h2>
         <div class="benefits-grid">
@@ -1065,7 +1071,6 @@
     </div>
 
     <div class="vista" id="v-zonas">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
     <section class="cobertura">
         <h2 class="section-title reveal">Zonas de Atención en Santiago</h2>
         <div class="comunas-list">
@@ -1080,27 +1085,25 @@
     </div>
 
     <div class="vista" id="v-faq">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
     <section class="faq">
         <h2 class="section-title reveal">Preguntas Frecuentes</h2>
         <div class="faq-container">
-            <details class="faq-item"><summary class="faq-question">💵 ¿Cuánto cuesta la atención? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>El valor depende del tipo de atención y de su comuna. Escríbanos por WhatsApp y le indicamos el valor de la evaluación inicial y de las sesiones, sin compromiso.</p></div></details>
-            <details class="faq-item"><summary class="faq-question">⏱️ ¿Cuánto dura una sesión? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>Cada sesión dura aproximadamente <strong>45 minutos</strong> de dedicación exclusiva y personalizada para usted. Tenga en consideración que este tiempo puede variar según sus necesidades y cómo avance su tratamiento.</p></div></details>
             <details class="faq-item"><summary class="faq-question">🏠 ¿Qué pasa en la primera visita? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>¡Nos conocemos! Conversamos sobre su historial, hacemos algunas pruebas suaves de movilidad, definimos juntos sus objetivos y comenzamos con la primera intervención. Todo con calma y en la comodidad de su hogar.</p></div></details>
-            <details class="faq-item"><summary class="faq-question">👵 ¿Atienden a adultos mayores? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>¡Es una de nuestras especialidades! Trabajamos con cariño y mucha paciencia para ayudarle a mantener su independencia, mejorar el equilibrio y prevenir caídas, siempre a su ritmo.</p></div></details>
-            <details class="faq-item"><summary class="faq-question">🧾 ¿Me dan boleta para el reembolso? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>¡Sí! Emitimos boleta de honorarios electrónica de salud, para que pueda gestionar su reembolso en Fonasa, Isapre o su seguro complementario sin complicaciones.</p></div></details>
+            <details class="faq-item"><summary class="faq-question">⏱️ ¿Cuánto dura una sesión? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>Cada sesión dura aproximadamente <strong>45 minutos</strong> de dedicación exclusiva y personalizada para usted. Tenga en consideración que este tiempo puede variar según sus necesidades y cómo avance su tratamiento.</p></div></details>
             <details class="faq-item"><summary class="faq-question">🎒 ¿Necesito preparar o comprar algo? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>Para nada. Nosotros llevamos todo lo necesario hasta su puerta. Usted solo necesita ropa cómoda y un pequeño espacio tranquilo; del resto nos encargamos nosotros.</p></div></details>
+            <details class="faq-item"><summary class="faq-question">👵 ¿Atienden a adultos mayores? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>¡Es una de nuestras especialidades! Trabajamos con cariño y mucha paciencia para ayudarle a mantener su independencia, mejorar el equilibrio y prevenir caídas, siempre a su ritmo.</p></div></details>
+            <details class="faq-item"><summary class="faq-question">💵 ¿Cuánto cuesta la atención? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>El valor depende del tipo de atención y de su comuna. Escríbanos por WhatsApp y le indicamos el valor de la evaluación inicial y de las sesiones, sin compromiso.</p></div></details>
+            <details class="faq-item"><summary class="faq-question">🧾 ¿Me dan boleta para el reembolso? <span class="chev"><svg class="ic" aria-hidden="true"><use xlink:href="#i-chev-down" href="#i-chev-down"></use></svg></span></summary><div class="faq-answer"><p>¡Sí! Emitimos boleta de honorarios electrónica de salud, para que pueda gestionar su reembolso en Fonasa, Isapre o su seguro complementario sin complicaciones.</p></div></details>
         </div>
     </section>
 
     </div>
 
-    <!-- ===== VISTA: Quién te atenderá ===== -->
+    <!-- ===== VISTA: Quién te atiende ===== -->
     <div class="vista" id="v-profesional">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
         <section class="pro">
-            <h2 class="section-title reveal">Quién te atenderá</h2>
-            <p class="section-subtitle">Detrás de RECUPERA hay un profesional con nombre, título y registro. Conózcalo antes de agendar.</p>
+            <h2 class="section-title reveal">Quién te atiende</h2>
+            <p class="section-subtitle">Detrás de RECUPERA hay un profesional con nombre, título y registro. Conózcalo.</p>
             <div class="pro-card reveal">
                 <div class="pro-photo">
                     <img src="esteban.jpg" alt="Esteban Rosset, Kinesiólogo de RECUPERA" loading="lazy" width="800" height="1066">
@@ -1108,12 +1111,13 @@
                 <div class="pro-info">
                     <h3>Esteban Rosset</h3>
                     <div class="pro-role">Kinesiólogo</div>
-                    <a class="pro-reg" href="https://rnpi.superdesalud.gob.cl/" target="_blank" rel="noopener" title="Verifique el registro en la Superintendencia de Salud"><svg class="ic" aria-hidden="true"><use xlink:href="#i-check-circle" href="#i-check-circle"></use></svg> Registro Superintendencia de Salud N° 525653 <span class="reg-verif">Verificar &rarr;</span></a>
-                    <p>Kinesiólogo titulado con experiencia en rehabilitación musculoesquelética, postoperatoria y atención de adultos mayores. Me especializo en llevar la rehabilitación hasta su hogar, con un trato cercano y un plan pensado para cada persona.</p>
-                    <p>Mi enfoque es simple: acompañarle paso a paso, a su ritmo, en el lugar donde más cómodo y seguro se siente: su casa.</p>
+                    <a class="pro-reg" href="https://rnpi.superdesalud.gob.cl/" target="_blank" rel="noopener" title="Verifique el registro en la Superintendencia de Salud"><svg class="ic" aria-hidden="true"><use xlink:href="#i-check-circle" href="#i-check-circle"></use></svg> Registro Superintendencia de Salud N° 525653 <span class="reg-verif">Ver certificado &rarr;</span></a>
+                    <p>Kinesiólogo titulado, con experiencia en rehabilitación musculoesquelética, postoperatoria y atención de adultos mayores.</p>
+                    <p>Me especializo en llevar la rehabilitación hasta donde usted esté —su hogar, un gimnasio o el espacio que prefiera—, con un trato cercano y un plan pensado para cada persona.</p>
+                    <p>Mi enfoque es simple: acompañarle paso a paso, a su ritmo, en el lugar donde más cómodo y seguro se siente.</p>
                     <div class="pro-cta">
-                        <a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" onclick="abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar con Esteban</a>
-                        <a href="https://wa.me/56979728587?text=Hola%20Esteban,%20quiero%20más%20información%20sobre%20la%20atención%20a%20domicilio." target="_blank" rel="noopener" class="btn btn-wa"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Escribir por WhatsApp</a>
+                        <a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" onclick="abrirAgendar();return false;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg> Agendar hora</a>
+                        <a href="https://wa.me/56979728587?text=Hola,%20quiero%20más%20información%20sobre%20la%20atención%20a%20domicilio%20de%20RECUPERA." target="_blank" rel="noopener" class="btn btn-wa"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Escribir por WhatsApp</a>
                     </div>
                 </div>
             </div>
@@ -1128,7 +1132,6 @@
 
     <!-- ===== VISTA: Testimonios ===== -->
     <div class="vista" id="v-testimonios">
-        <div class="vista-back"><a class="btn-volver" href="#v-inicio"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Volver al inicio</a></div>
         <section>
             <h2 class="section-title reveal">Lo que dicen los pacientes</h2>
             <p class="section-subtitle">Experiencias de personas que recuperaron su movilidad con atención a domicilio.</p>
@@ -1155,14 +1158,12 @@
     <footer>
         <div class="footer-grid">
             <div>
-                <h3>RECUPERA</h3>
+                <div class="footer-logo"><svg viewBox="0 0 196 46" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kine Recupera"><text x="2" y="44" style="font-family:'Poppins',Arial,sans-serif" font-weight="700" font-size="27" fill="#FFFFFF" textLength="192" lengthAdjust="spacingAndGlyphs">RECUPERA</text><text x="9" y="26" style="font-family:'Caveat','Brush Script MT',cursive" font-weight="700" font-size="33" fill="#5FB97E">Kine</text></svg></div>
                 <p>Kinesiología y rehabilitación a domicilio en Santiago. Atención profesional y cercana en su hogar.</p>
-                <p style="margin-top:10px;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-user" href="#i-user"></use></svg> Esteban Rosset · Kinesiólogo<br><span style="opacity:0.8;">Reg. Superintendencia de Salud N° 525653</span></p>
             </div>
             <div><h3>Contacto</h3>
                 <ul>
                     <li><a href="https://wa.me/56979728587?text=Hola,%20quiero%20agendar%20una%20evaluación%20kinésica%20a%20domicilio%20con%20RECUPERA." target="_blank" rel="noopener"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> +56 9 7972 8587</a></li>
-                    <li><a href="tel:+56979728587"><svg class="ic" aria-hidden="true"><use xlink:href="#i-phone" href="#i-phone"></use></svg> Llamar ahora</a></li>
                     <li><a href="mailto:kinerecupera@gmail.com"><svg class="ic" aria-hidden="true"><use xlink:href="#i-mail" href="#i-mail"></use></svg> kinerecupera@gmail.com</a></li>
                     <!-- INSTAGRAM (oculto por ahora). Cuando cree la cuenta, borre el "display:none"
                          y reemplace "SU_USUARIO" por su usuario real de Instagram: -->
@@ -1170,14 +1171,13 @@
                 </ul>
             </div>
             <div><h3>Horarios de atención</h3>
-                <p>Lunes a sábado, con horarios flexibles. Vea la disponibilidad real al agendar en línea o consúltenos por WhatsApp.</p>
+                <p>Lunes a sábado. Vea la disponibilidad al agendar en línea o consúltenos por WhatsApp.</p>
             </div>
-            <div><h3>Cobertura</h3><p>Providencia, Las Condes, Ñuñoa, Vitacura, La Reina, Macul, San Joaquín, San Miguel, Pedro Aguirre Cerda y La Florida. ¿Otra comuna? Consúltenos por WhatsApp.</p></div>
+            <div><h3>Cobertura</h3><p>Atención a domicilio en Santiago. La cobertura exacta se coordina al agendar; consúltenos por WhatsApp.</p></div>
         </div>
         <div class="footer-bottom"><p>&copy; 2026 RECUPERA Kinesiología · Esteban Rosset · Reg. Salud N° 525653 · Santiago, Chile</p></div>
     </footer>
 
-    <a href="tel:+56979728587" class="call-float" aria-label="Llamar por teléfono"><svg class="ic" aria-hidden="true"><use xlink:href="#i-phone" href="#i-phone"></use></svg></a>
     <a href="https://wa.me/56979728587?text=Hola,%20quiero%20agendar%20una%20evaluación%20kinésica%20a%20domicilio%20con%20RECUPERA." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
         <svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg>
     </a>
@@ -1199,10 +1199,9 @@
             <div class="assist-banner">
                 <div class="assist-text">
                     <strong>¿Prefiere que le ayudemos?</strong>
-                    <span>Llámenos o escríbanos y coordinamos su hora por usted, sin formularios.</span>
+                    <span>Escríbanos y coordinamos su hora con usted, sin formularios.</span>
                 </div>
                 <div class="assist-actions">
-                    <a href="tel:+56979728587" class="btn btn-primary"><svg class="ic" aria-hidden="true"><use xlink:href="#i-phone" href="#i-phone"></use></svg> Llamar</a>
                     <a href="https://wa.me/56979728587?text=Hola,%20quiero%20que%20me%20ayuden%20a%20agendar%20una%20hora%20con%20RECUPERA." target="_blank" rel="noopener" class="btn btn-wa"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> WhatsApp</a>
                 </div>
             </div>
@@ -1824,11 +1823,11 @@
         /* ===== Línea de proceso "Cómo Funciona" ===== */
         const PASOS = [
             { icon: "calendar-check", t: "Agende su hora",
-              d: "Elija servicio, día y hora tocando \"Agendar hora\". O escríbanos por WhatsApp y lo coordinamos por usted." },
+              d: "Elija servicio, día y hora en \"Agendar hora\". O escríbanos por WhatsApp y lo coordinamos con usted." },
             { icon: "home", t: "Evaluación en casa",
               d: "Un kinesiólogo llega a su hogar el día acordado, evalúa su caso y definen juntos los objetivos." },
             { icon: "clipboard", t: "Plan a su medida",
-              d: "Diseñamos un plan de sesiones a su medida: su ritmo, sus tiempos y sus metas." },
+              d: "Diseñamos un plan de sesiones a su medida, su ritmo, sus tiempos y sus metas." },
             { icon: "chart", t: "Seguimiento continuo",
               d: "Registramos sus avances sesión a sesión y le acompañamos hasta el alta." }
         ];
