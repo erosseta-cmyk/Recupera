@@ -64,8 +64,10 @@
             --ok: #1B7A3D;
             --border: #C7D2DE;
             --radius: 14px;
-            --brand-green: #2E9E5B;   /* verde de marca: logo + boton Agendar */
+            --brand-green: #2E9E5B;   /* verde de marca: logo */
             --brand-green-d: #25804A;
+            --brand-blue: #2563B0;    /* azul de marca: botón Agendar */
+            --brand-blue-d: #1E5497;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -99,7 +101,7 @@
 
         /* ===== Ventanas de servicio que abren SIN JavaScript (:target) ===== */
         a.card.service { text-decoration: none; color: inherit; display: block; }
-        .serv-modal { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(15,44,89,0.6); z-index: 99999; padding: 20px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .serv-modal { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(15,44,89,0.6); z-index: 99999; padding: 20px 20px max(20px, env(safe-area-inset-bottom)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .serv-modal:target { display: flex; align-items: flex-start; justify-content: center; }
         body:has(.serv-modal:target) { overflow: hidden; }
         .serv-box { background: #fff; border-radius: 18px; max-width: 560px; width: 100%; margin: 30px auto; padding: 30px 26px; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.35); }
@@ -151,7 +153,9 @@
         .nav-toggle { display: none; background: none; border: none; color: var(--primary); font-size: 1.7rem; cursor: pointer; padding: 6px 8px; line-height: 1; touch-action: manipulation; -webkit-tap-highlight-color: rgba(37,99,176,0.2); }
         .skip-link { position: absolute; left: -9999px; top: 0; background: var(--primary); color: #fff; padding: 12px 18px; z-index: 100000; border-radius: 0 0 10px 0; font-weight: 600; }
         .skip-link:focus { left: 0; }
-        .mobile-menu { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: var(--white); z-index: 99998; flex-direction: column; padding: 16px 18px 30px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+        .whatsapp-float.oculto { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .25s ease, visibility .25s ease; }
+        .mobile-menu { display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: var(--white); z-index: 99998; flex-direction: column; padding: 16px 18px max(30px, env(safe-area-inset-bottom)); overflow-y: auto; -webkit-overflow-scrolling: touch; }
         .mobile-menu:target { display: flex; }
         body:has(.mobile-menu:target) { overflow: hidden; }
         .mobile-menu .mm-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
@@ -267,11 +271,13 @@
             text-align: center;
             box-shadow: 0 4px 14px rgba(0,0,0,0.10);
         }
-        .btn-primary { background-color: var(--brand-green); color: var(--white); }
+        .btn-primary { background-color: var(--brand-blue); color: #fff; }
+        .nav-cta .btn-primary, .nav-cta .btn-primary:hover { color: #fff; }
+        .hero .btn-primary { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.55), 0 6px 18px rgba(0,0,0,0.18); }
         .btn-secondary { background-color: transparent; color: var(--white); border: 2px solid var(--white); }
         .btn-wa { background-color: var(--whatsapp); color: var(--white); }
         .btn:focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
-            outline: 3px solid #F59E0B; outline-offset: 2px;
+            outline: 3px solid var(--primary); outline-offset: 2px; box-shadow: 0 0 0 6px rgba(255,255,255,0.85);
         }
 
         /* ===== Hero ===== */
@@ -384,7 +390,7 @@
 
         /* Tarjeta de servicio interactiva (abre ventana) */
         .card.service { cursor: pointer; position: relative; text-align: left; border: 1px solid #E4EAF2; }
-        .card.service:focus-visible { outline: 3px solid #F59E0B; outline-offset: 3px; }
+        .card.service:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
         .card.service .ver-mas {
             display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
             color: var(--secondary); font-weight: 600; font-size: 1rem;
@@ -396,7 +402,7 @@
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;
             background: rgba(15,44,89,0.75);
             display: none; align-items: flex-start; justify-content: center; z-index: 99999;
-            padding: 24px 16px; overflow-y: auto; -webkit-overflow-scrolling: touch;
+            padding: 24px 16px max(24px, env(safe-area-inset-bottom)); overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
         .modal-overlay.open { display: flex; animation: fade 0.25s ease; }
         .modal {
@@ -416,7 +422,7 @@
         }
         .modal-head h3 { color: #fff; font-size: 1.4rem; line-height: 1.25; }
         .modal-close {
-            position: absolute; top: 14px; right: 14px; width: 42px; height: 42px; border-radius: 50%;
+            position: absolute; top: 14px; right: 14px; width: 44px; height: 44px; border-radius: 50%;
             background: rgba(255,255,255,0.2); color: #fff; border: none; cursor: pointer; font-size: 1.2rem;
             display: flex; align-items: center; justify-content: center;
         }
@@ -445,7 +451,7 @@
         .flow-steps::before { content: ""; position: absolute; top: 34px; left: 9%; right: 9%; height: 5px; background: #D8E2EF; border-radius: 5px; z-index: 0; }
         .flow-steps::after { content: ""; position: absolute; top: 34px; left: 9%; height: 5px; background: linear-gradient(90deg, var(--secondary), var(--whatsapp)); border-radius: 5px; z-index: 1; width: var(--prog, 0%); transition: width 0.45s ease; }
         .flow-step { flex: 1; text-align: center; cursor: pointer; position: relative; z-index: 2; background: transparent; border: none; padding: 4px; font-family: inherit; }
-        .flow-step:focus-visible { outline: 3px solid #F59E0B; outline-offset: 3px; border-radius: 12px; }
+        .flow-step:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; border-radius: 12px; }
         .flow-step .circle {
             width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 12px;
             background: var(--white); border: 3px solid #D8E2EF; color: var(--text-muted);
@@ -572,11 +578,13 @@
         .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
         .cal-grid .wd { text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); padding: 6px 0; }
         .cal-day {
-            aspect-ratio: 1 / 1; border: 1px solid var(--border); border-radius: 10px;
+            aspect-ratio: 1 / 1; min-height: 44px; border: 1px solid var(--border); border-radius: 10px;
             background: var(--white); cursor: pointer; font-size: 1.05rem; font-weight: 500;
             display: flex; align-items: center; justify-content: center; color: var(--text-dark);
             transition: all 0.15s ease;
+            font-family: inherit; -webkit-appearance: none; appearance: none; padding: 0;
         }
+        .cal-day:disabled { opacity: 1; }
         .cal-day.disabled { color: #C0C7D1; background: #F7F8FA; cursor: not-allowed; border-color: #EDEFF2; }
         .cal-day.full {
             color: #B26A00; background: #FFF4E0; border-color: #F2C879; cursor: not-allowed;
@@ -665,7 +673,6 @@
             border: 1px solid var(--border); border-left: 5px solid var(--secondary);
             transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
         }
-        .faq-item.active { background: var(--white); border-left-color: var(--ok); box-shadow: 0 8px 24px rgba(15,44,89,0.12); }
         .faq-question {
             padding: 22px; font-weight: 600; font-size: 1.15rem; cursor: pointer;
             display: flex; justify-content: space-between; align-items: center; gap: 14px; color: var(--primary);
@@ -675,13 +682,11 @@
             background: var(--secondary); color: #fff; display: flex; align-items: center; justify-content: center;
             font-size: 0.95rem; transition: transform 0.3s ease, background 0.3s ease;
         }
-        .faq-item.active .faq-question .chev { transform: rotate(180deg); background: var(--ok); }
         .faq-answer { padding: 0 22px 4px; color: var(--text-muted); font-size: 1.05rem; }
         .faq-question { list-style: none; }
         .faq-question::-webkit-details-marker { display: none; }
         details.faq-item[open] .chev { transform: rotate(180deg); background: var(--ok); }
         details.faq-item[open] { background: var(--white); border-left-color: var(--ok); box-shadow: 0 8px 24px rgba(15,44,89,0.12); }
-        .faq-item.active .faq-answer { padding: 0 22px 22px; max-height: 380px; }
 
         /* WhatsApp flotante */
         .whatsapp-float { position: fixed; bottom: 26px; right: 26px; background-color: var(--whatsapp); color: white; width: 66px; height: 66px; border-radius: 50%; text-align: center; font-size: 2rem; box-shadow: 2px 2px 16px rgba(0,0,0,0.25); z-index: 800; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
@@ -826,7 +831,7 @@
         .access-bar button:hover, .access-bar button.active { background: var(--secondary); border-color: var(--white); }
         .nav-links a:hover { color: var(--secondary); }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.18); }
-        .btn-primary:hover { background-color: var(--brand-green-d); }
+        .btn-primary:hover { background-color: var(--brand-blue-d); }
         .btn-secondary:hover { background-color: var(--white); color: var(--primary); }
         .btn-wa:hover { background-color: #168a45; }
         .about-card:hover { transform: translateY(-10px); box-shadow: 0 20px 44px rgba(15,44,89,0.18); }
@@ -876,10 +881,10 @@
     <!-- Barra de accesibilidad: tamaño de letra -->
     <div class="access-bar">
         <span><svg class="ic" aria-hidden="true"><use xlink:href="#i-type" href="#i-type"></use></svg> ¿Le cuesta leer? Agrande el texto:</span>
-        <div class="fs-controls">
-            <button class="a1 active" onclick="setFont(this,19)" aria-label="Letra normal">A</button>
-            <button class="a2" onclick="setFont(this,23)" aria-label="Letra grande">A+</button>
-            <button class="a3" onclick="setFont(this,27)" aria-label="Letra muy grande">A++</button>
+        <div class="fs-controls" role="group" aria-label="Tamaño de letra">
+            <button class="a1 active" onclick="setFont(this,19)" aria-label="Letra normal" aria-pressed="true">A</button>
+            <button class="a2" onclick="setFont(this,23)" aria-label="Letra grande" aria-pressed="false">A+</button>
+            <button class="a3" onclick="setFont(this,27)" aria-label="Letra muy grande" aria-pressed="false">A++</button>
         </div>
     </div>
 
@@ -893,7 +898,7 @@
             <li class="nav-section"><a href="#v-testimonios" data-vista="testimonios">Testimonios</a></li>
             <li class="nav-section"><a href="#v-faq" data-vista="faq">Preguntas</a></li>
             <li class="nav-wa"><a href="https://wa.me/56979728587?text=Hola,%20quiero%20agendar%20una%20evaluación%20kinésica%20a%20domicilio%20con%20RECUPERA." target="_blank" rel="noopener" style="color: var(--whatsapp); font-weight: 600;"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> <span class="nav-wa-text">WhatsApp</span></a></li>
-            <li class="nav-cta"><a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" style="color:white; padding:10px 20px;" onclick="abrirAgendar();return false;">Agendar<span class="cta-extra"> hora</span></a></li>
+            <li class="nav-cta"><a href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" class="btn btn-primary" style="padding:10px 20px;" onclick="abrirAgendar();return false;">Agendar<span class="cta-extra"> hora</span></a></li>
         </ul>
         <a class="nav-toggle" href="#menu" role="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><svg class="ic" aria-hidden="true"><use xlink:href="#i-menu" href="#i-menu"></use></svg></a>
     </nav>
@@ -934,10 +939,10 @@
     <!-- Franja de confianza -->
     <div class="trust-band">
         <div class="trust-grid">
-            <div class="trust-item reveal"><svg class="ic" aria-hidden="true"><use xlink:href="#i-home" href="#i-home"></use></svg><div class="num">100%</div><div class="lbl">Atención en su hogar</div></div>
-            <div class="trust-item reveal"><svg class="ic" aria-hidden="true"><use xlink:href="#i-user-check" href="#i-user-check"></use></svg><div class="num">1 a 1</div><div class="lbl">Atención solo para usted</div></div>
-            <div class="trust-item reveal"><svg class="ic" aria-hidden="true"><use xlink:href="#i-clock" href="#i-clock"></use></svg><div class="num">45 min</div><div class="lbl">Atención personalizada</div></div>
-            <div class="trust-item reveal"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg><div class="num">Lun a Sáb</div><div class="lbl">Horarios flexibles</div></div>
+            <div class="trust-item reveal"><div class="num">100%</div><div class="lbl">Atención en su hogar</div></div>
+            <div class="trust-item reveal"><div class="num">1 a 1</div><div class="lbl">Atención solo para usted</div></div>
+            <div class="trust-item reveal"><div class="num">45 min</div><div class="lbl">Atención personalizada</div></div>
+            <div class="trust-item reveal"><div class="num">Lun a Sáb</div><div class="lbl">Horarios flexibles</div></div>
         </div>
     </div>
 
@@ -950,7 +955,7 @@
             <a class="tile" href="#v-profesional"><span class="t-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-user" href="#i-user"></use></svg></span><span class="t-tx"><b>Quién te atiende</b><span>Conoce al profesional</span></span></a>
             <a class="tile" href="#v-servicios"><span class="t-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-heart" href="#i-heart"></use></svg></span><span class="t-tx"><b>Servicios</b><span>Qué tratamos y cómo</span></span></a>
             <a class="tile" href="#v-comofunciona"><span class="t-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-route" href="#i-route"></use></svg></span><span class="t-tx"><b>Cómo funciona</b><span>La atención paso a paso</span></span></a>
-            <a class="tile" href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" onclick="abrirAgendar();return false;"><span class="t-ic" style="background:linear-gradient(135deg,var(--whatsapp),#168a45)"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg></span><span class="t-tx"><b>Agendar hora</b><span>Reserve en línea</span></span></a>
+            <a class="tile" href="https://cal.com/recupera-kine/evaluacion-kinesica-a-domicilio" target="_blank" rel="noopener" onclick="abrirAgendar();return false;"><span class="t-ic" style="background:linear-gradient(135deg,var(--brand-blue),var(--brand-blue-d))"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg></span><span class="t-tx"><b>Agendar hora</b><span>Reserve en línea</span></span></a>
         </div>
     </div>
     </div>
@@ -1189,7 +1194,7 @@
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="agendarTitulo">
             <div class="modal-head">
                 <div class="m-icon"><svg class="ic" aria-hidden="true"><use xlink:href="#i-calendar-check" href="#i-calendar-check"></use></svg></div>
-                <h3 id="agendarTitulo">Agende su hora en 4 simples pasos</h3>
+                <h3 id="agendarTitulo">Agende su hora paso a paso</h3>
                 <button class="modal-close" onclick="cerrarAgendar()" aria-label="Cerrar ventana"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></button>
             </div>
 
@@ -1206,11 +1211,12 @@
             </div>
 
             <!-- Sistema de reservas Cal.com (se activa al configurar CAL_LINK) -->
-            <div id="calEmbed" style="display:none; min-height:560px;"></div>
+            <div id="calEmbed" style="display:none; min-height:clamp(440px,70vh,620px);"></div>
 
             <!-- Agendamiento manual (se usa mientras no haya CAL_LINK configurado) -->
             <div id="manualBooking">
             <!-- Indicador de pasos -->
+            <div class="sr-only" id="stepLive" aria-live="polite"></div>
             <div class="stepper" id="stepper">
                 <div class="dot active" data-step="1"><span class="num">1</span><span class="label">Servicio</span></div>
                 <span class="sep">›</span>
@@ -1272,35 +1278,36 @@
                 <p class="step-help">Necesitamos saber a quién y dónde visitar.</p>
 
                 <div class="form-group" id="g-nombre">
-                    <label>Nombre completo <span class="req">*</span></label>
-                    <input type="text" id="f-nombre" placeholder="Ej: María González">
-                    <div class="field-error">Por favor escriba su nombre.</div>
+                    <label for="f-nombre">Nombre completo <span class="req">*</span></label>
+                    <input type="text" id="f-nombre" autocomplete="name" placeholder="Ej: María González">
+                    <div class="field-error" id="g-nombre-err" role="alert">Por favor escriba su nombre.</div>
                 </div>
                 <div class="form-group" id="g-telefono">
-                    <label>Teléfono <span class="req">*</span></label>
-                    <input type="tel" id="f-telefono" inputmode="tel" placeholder="Ej: +56 9 1234 5678">
-                    <div class="field-error">Por favor escriba un teléfono de contacto.</div>
+                    <label for="f-telefono">Teléfono <span class="req">*</span></label>
+                    <input type="tel" id="f-telefono" inputmode="tel" autocomplete="tel" placeholder="Ej: +56 9 1234 5678">
+                    <div class="field-error" id="g-telefono-err" role="alert">Por favor escriba un teléfono de contacto.</div>
                 </div>
                 <div class="form-group" id="g-comuna">
-                    <label>Comuna <span class="req">*</span></label>
-                    <input type="text" id="f-comuna" placeholder="Ej: Ñuñoa">
-                    <div class="field-error">Por favor indique su comuna.</div>
+                    <label for="f-comuna">Comuna <span class="req">*</span></label>
+                    <input type="text" id="f-comuna" autocomplete="address-level2" placeholder="Ej: Ñuñoa">
+                    <div class="field-error" id="g-comuna-err" role="alert">Por favor indique su comuna.</div>
                 </div>
                 <div class="form-group" id="g-direccion">
-                    <label>Dirección <span class="req">*</span></label>
-                    <input type="text" id="f-direccion" placeholder="Calle, número y departamento">
-                    <div class="field-error">Por favor indique su dirección.</div>
+                    <label for="f-direccion">Dirección <span class="req">*</span></label>
+                    <input type="text" id="f-direccion" autocomplete="street-address" placeholder="Calle, número y departamento">
+                    <div class="field-error" id="g-direccion-err" role="alert">Por favor indique su dirección.</div>
+                </div>
+                <div class="form-group" id="g-email">
+                    <label for="f-email">Correo electrónico (opcional)</label>
+                    <input type="email" id="f-email" autocomplete="email" placeholder="ejemplo@correo.com">
+                    <div class="field-error" id="g-email-err" role="alert">Revise su correo: debe tener formato ejemplo@correo.com.</div>
                 </div>
                 <div class="form-group">
-                    <label>Correo electrónico (opcional)</label>
-                    <input type="email" id="f-email" placeholder="ejemplo@correo.com">
-                </div>
-                <div class="form-group">
-                    <label>Motivo de la consulta (opcional)</label>
+                    <label for="f-motivo">Motivo de la consulta (opcional)</label>
                     <textarea id="f-motivo" rows="3" placeholder="Cuéntenos brevemente qué le ocurre o su diagnóstico"></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Orden médica (opcional)</label>
+                    <label for="f-orden">Orden médica (opcional)</label>
                     <div class="upload-zone">
                         <svg class="ic" aria-hidden="true"><use xlink:href="#i-clip" href="#i-clip"></use></svg>
                         <div class="upload-text">Toque aquí para adjuntar su orden médica</div>
@@ -1326,12 +1333,12 @@
 
                     <div class="privacy-note">
                         <svg class="ic" aria-hidden="true"><use xlink:href="#i-shield" href="#i-shield"></use></svg>
-                        <div>Sus datos se envían directamente a RECUPERA solo para coordinar su hora. No se guardan en este sitio ni se comparten con terceros.</div>
+                        <div>Usamos sus datos solo para contactarlo y coordinar su hora, a través de WhatsApp o correo. No los publicamos ni los vendemos. Puede pedirnos que los eliminemos cuando quiera.</div>
                     </div>
 
                     <div class="confirm-actions">
                         <button class="btn btn-wa" onclick="enviarWhatsApp()"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Confirmar por WhatsApp (recomendado)</button>
-                        <button class="btn btn-primary" id="btnCorreo" onclick="enviarCorreo()"><svg class="ic" aria-hidden="true"><use xlink:href="#i-mail" href="#i-mail"></use></svg> Enviar por correo</button>
+                        <button class="btn btn-ghost" id="btnCorreo" onclick="enviarCorreo()"><svg class="ic" aria-hidden="true"><use xlink:href="#i-mail" href="#i-mail"></use></svg> Enviar por correo</button>
                         <button class="btn btn-ghost" onclick="next(4)"><svg class="ic" aria-hidden="true"><use xlink:href="#i-arrow-left" href="#i-arrow-left"></use></svg> Corregir mis datos</button>
                     </div>
                 </div>
@@ -1339,7 +1346,7 @@
                 <!-- Éxito -->
                 <div class="success-box" id="successView" style="display:none;">
                     <div class="check"><svg class="ic" aria-hidden="true"><use xlink:href="#i-check" href="#i-check"></use></svg></div>
-                    <h3>¡Solicitud enviada!</h3>
+                    <h3 id="successTitle" tabindex="-1">¡Solicitud enviada!</h3>
                     <p id="successMsg">Recibimos su solicitud. Le contactaremos pronto para confirmar la hora exacta de la visita.</p>
                     <a href="#" class="btn btn-primary" onclick="reiniciar();return false;">Agendar otra hora</a>
                 </div>
@@ -1351,11 +1358,11 @@
 
     <!-- Ventana emergente de servicios -->
 
-    <div class="serv-modal" id="serv-musculo">
+    <div class="serv-modal" id="serv-musculo" role="dialog" aria-modal="true" aria-labelledby="serv-musculo-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-bone" href="#i-bone"></use></svg></div>
-            <h3>Kinesiología Musculoesquelética</h3>
+            <h3 id="serv-musculo-title">Kinesiología Musculoesquelética</h3>
             <h4>¿Qué es?</h4>
             <p>Es el tratamiento de las lesiones de músculos, huesos, tendones y articulaciones. Ayuda a recuperar el movimiento y a quitar el dolor después de una lesión, sin necesidad de operarse en muchos casos.</p>
             <h4>Ejemplo</h4>
@@ -1367,11 +1374,11 @@
             </div>
         </div>
     </div>
-    <div class="serv-modal" id="serv-postop">
+    <div class="serv-modal" id="serv-postop" role="dialog" aria-modal="true" aria-labelledby="serv-postop-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-bed" href="#i-bed"></use></svg></div>
-            <h3>Rehabilitación Postoperatoria</h3>
+            <h3 id="serv-postop-title">Rehabilitación Postoperatoria</h3>
             <h4>¿Qué es?</h4>
             <p>Es la recuperación guiada después de una operación. Acompañamos paso a paso para que recupere la fuerza y el movimiento de forma segura, respetando los tiempos de cada cirugía.</p>
             <h4>Ejemplo</h4>
@@ -1383,11 +1390,11 @@
             </div>
         </div>
     </div>
-    <div class="serv-modal" id="serv-cardio">
+    <div class="serv-modal" id="serv-cardio" role="dialog" aria-modal="true" aria-labelledby="serv-cardio-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-heart-pulse" href="#i-heart-pulse"></use></svg></div>
-            <h3>Rehabilitación Cardiopulmonar</h3>
+            <h3 id="serv-cardio-title">Rehabilitación Cardiopulmonar</h3>
             <h4>¿Qué es?</h4>
             <p>Son ejercicios y entrenamiento para mejorar la respiración y el funcionamiento del corazón. Sirve para sentirse con más energía y cansarse menos en las actividades del día a día.</p>
             <h4>Ejemplo</h4>
@@ -1399,11 +1406,11 @@
             </div>
         </div>
     </div>
-    <div class="serv-modal" id="serv-neuro">
+    <div class="serv-modal" id="serv-neuro" role="dialog" aria-modal="true" aria-labelledby="serv-neuro-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-bolt" href="#i-bolt"></use></svg></div>
-            <h3>Kinesiología Neuromuscular</h3>
+            <h3 id="serv-neuro-title">Kinesiología Neuromuscular</h3>
             <h4>¿Qué es?</h4>
             <p>Es la rehabilitación del movimiento cuando el sistema nervioso se ve afectado, por ejemplo después de un accidente cerebrovascular, una parálisis o enfermedades como el Parkinson. Trabajamos la fuerza, la coordinación y el control del cuerpo para recuperar la mayor independencia posible.</p>
             <h4>Ejemplo</h4>
@@ -1416,11 +1423,11 @@
         </div>
     </div>
 
-    <div class="serv-modal" id="serv-mayores">
+    <div class="serv-modal" id="serv-mayores" role="dialog" aria-modal="true" aria-labelledby="serv-mayores-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-cane" href="#i-cane"></use></svg></div>
-            <h3>Atención de Adultos Mayores</h3>
+            <h3 id="serv-mayores-title">Atención de Adultos Mayores</h3>
             <h4>¿Qué es?</h4>
             <p>Es una atención pensada especialmente para personas mayores. Buscamos mantener su independencia, mejorar el equilibrio al caminar y, sobre todo, prevenir caídas.</p>
             <h4>Ejemplo</h4>
@@ -1432,11 +1439,11 @@
             </div>
         </div>
     </div>
-    <div class="serv-modal" id="serv-dolor">
+    <div class="serv-modal" id="serv-dolor" role="dialog" aria-modal="true" aria-labelledby="serv-dolor-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-crutch" href="#i-crutch"></use></svg></div>
-            <h3>Dolor Cervical, Lumbar y Articular</h3>
+            <h3 id="serv-dolor-title">Dolor Cervical, Lumbar y Articular</h3>
             <h4>¿Qué es?</h4>
             <p>Es el tratamiento del dolor de cuello, espalda baja y articulaciones. Combinamos terapia manual y ejercicios suaves para aliviar la molestia y evitar que vuelva a aparecer.</p>
             <h4>Ejemplo</h4>
@@ -1448,11 +1455,11 @@
             </div>
         </div>
     </div>
-    <div class="serv-modal" id="serv-ejercicio">
+    <div class="serv-modal" id="serv-ejercicio" role="dialog" aria-modal="true" aria-labelledby="serv-ejercicio-title">
         <div class="serv-box">
             <a href="#v-servicios" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
             <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-dumbbell" href="#i-dumbbell"></use></svg></div>
-            <h3>Ejercicio Terapéutico</h3>
+            <h3 id="serv-ejercicio-title">Ejercicio Terapéutico</h3>
             <h4>¿Qué es?</h4>
             <p>Son ejercicios diseñados a la medida de cada persona, con un objetivo de salud. No es ir al gimnasio: cada movimiento está pensado para su cuerpo y su necesidad.</p>
             <h4>Ejemplo</h4>
@@ -1537,26 +1544,64 @@
         /* ===== Accesibilidad: tamaño de letra ===== */
         function setFont(btn, size){
             document.documentElement.style.fontSize = size + "px";
-            document.querySelectorAll(".access-bar button").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+            document.querySelectorAll(".access-bar button").forEach(b => {
+                b.classList.toggle("active", b === btn);
+                b.setAttribute("aria-pressed", b === btn ? "true" : "false");
+            });
         }
 
         /* ===== Navegación entre pasos ===== */
+        const ETIQUETAS_PASO = {1:"Servicio",2:"Día",3:"Hora",4:"Sus datos",5:"Confirmar"};
         function next(step){
             document.querySelectorAll(".step-panel").forEach(p => p.classList.remove("active"));
-            document.querySelector('.step-panel[data-panel="'+step+'"]').classList.add("active");
+            const panel = document.querySelector('.step-panel[data-panel="'+step+'"]');
+            panel.classList.add("active");
             document.querySelectorAll("#stepper .dot").forEach(d => {
                 const n = parseInt(d.dataset.step);
                 d.classList.remove("active","done");
                 if(n < step) d.classList.add("done");
                 if(n === step) d.classList.add("active");
             });
+            const live = document.getElementById("stepLive");
+            if(live) live.textContent = "Paso " + step + " de 5: " + (ETIQUETAS_PASO[step] || "");
+            const titulo = panel.querySelector(".step-title");
+            if(titulo){ titulo.setAttribute("tabindex","-1"); titulo.focus({preventScroll:true}); }
             const modal = document.querySelector("#agendarModal .modal");
             if(modal) modal.scrollTo({ top: 0, behavior: "smooth" });
         }
 
         /* ===== Abrir / cerrar la ventana de agendamiento ===== */
         let calCargado = false;
+        function mostrarCalEmbed(){
+            const cal = document.getElementById("calEmbed");
+            cal.style.display = "block";
+            // Placeholder de carga + red de seguridad si Cal.com no aparece
+            if(!cal.querySelector("iframe") && !document.getElementById("calLoading")){
+                cal.insertAdjacentHTML("afterbegin",
+                    '<p id="calLoading" style="text-align:center;padding:44px 20px;color:#555;font-size:1.05rem;">Cargando el calendario… un momento, por favor.</p>');
+                let intentos = 0;
+                clearInterval(window._calPoll);
+                window._calPoll = setInterval(function(){
+                    intentos++;
+                    const ld = document.getElementById("calLoading");
+                    if(cal.querySelector("iframe")){
+                        if(ld) ld.remove();
+                        clearInterval(window._calPoll);
+                    } else if(intentos >= 30){ // ~9 segundos
+                        clearInterval(window._calPoll);
+                        if(ld){
+                            ld.outerHTML = '<div style="text-align:center;padding:30px 18px;">'
+                                + '<p style="margin:0 0 16px;color:#333;font-size:1.05rem;">¿No aparece el calendario? Le agendamos nosotros.</p>'
+                                + '<a class="btn btn-wa" target="_blank" rel="noopener" href="https://wa.me/'
+                                + AGENDA.whatsapp + '?text=' + encodeURIComponent("Hola, quiero agendar una hora.")
+                                + '"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Escríbanos por WhatsApp</a></div>';
+                        }
+                    }
+                }, 300);
+            }
+            cargarCal();
+        }
+
         function cargarCal(){
             if(calCargado || !CAL_LINK) return;
             calCargado = true;
@@ -1576,9 +1621,10 @@
             if(CAL_LINK){
                 // Modo reservas reales: mostrar Cal.com, ocultar el flujo manual
                 document.getElementById("manualBooking").style.display = "none";
-                document.getElementById("calEmbed").style.display = "block";
-                cargarCal();
+                document.getElementById("agendarTitulo").textContent = "Reserve su hora en línea";
+                mostrarCalEmbed();
             } else {
+                document.getElementById("agendarTitulo").textContent = "Agende su hora paso a paso";
                 document.getElementById("manualBooking").style.display = "";
                 document.getElementById("calEmbed").style.display = "none";
             }
@@ -1592,8 +1638,24 @@
         function cerrarAgendar(){
             document.getElementById("agendarModal").classList.remove("open");
             document.body.style.overflow = "";
+            clearInterval(window._calPoll);
+            const cl = document.getElementById("calLoading");
+            if(cl) cl.remove();
             if(focoPrevio && focoPrevio.focus){ focoPrevio.focus(); focoPrevio = null; }
         }
+
+        /* ===== Focus-trap: el tabulador no sale del modal abierto ===== */
+        document.addEventListener("keydown", function(e){
+            if(e.key !== "Tab") return;
+            const overlay = document.querySelector(".modal-overlay.open");
+            if(!overlay) return;
+            const foco = overlay.querySelectorAll('a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])');
+            const visibles = Array.prototype.filter.call(foco, el => el.offsetParent !== null);
+            if(!visibles.length) return;
+            const primero = visibles[0], ultimo = visibles[visibles.length - 1];
+            if(e.shiftKey && document.activeElement === primero){ ultimo.focus(); e.preventDefault(); }
+            else if(!e.shiftKey && document.activeElement === ultimo){ primero.focus(); e.preventDefault(); }
+        });
 
         /* ===== PASO 1: Servicios ===== */
         const serviceList = document.getElementById("serviceList");
@@ -1647,28 +1709,31 @@
 
             const daysInMonth = new Date(year, month+1, 0).getDate();
             for(let d=1; d<=daysInMonth; d++){
-                const cell = document.createElement("div");
+                const cell = document.createElement("button");
+                cell.type = "button";
                 cell.className = "cal-day"; cell.textContent = d;
                 const date = new Date(year, month, d);
                 const isPast = date < today;
                 const dow = date.getDay();
                 const esLleno = AGENDA.diasLlenos.includes(dow);
                 const sinAtencion = !AGENDA.horariosPorDia[dow] && !esLleno;
+                const etqFecha = d + " de " + MESES[month];
                 if(isPast){
-                    cell.classList.add("disabled");
+                    cell.classList.add("disabled"); cell.disabled = true;
+                    cell.setAttribute("aria-label", etqFecha + ", no disponible");
                 } else if(esLleno){
-                    cell.classList.add("full");
+                    cell.classList.add("full"); cell.disabled = true;
                     cell.title = "Agendado / Completo";
+                    cell.setAttribute("aria-label", etqFecha + ", agendado (completo)");
                 } else if(sinAtencion){
-                    cell.classList.add("disabled");
-                }
-                if(isPast || esLleno || sinAtencion){
-                    /* no clickable */
-                }
-                else {
+                    cell.classList.add("disabled"); cell.disabled = true;
+                    cell.setAttribute("aria-label", etqFecha + ", sin atención");
+                } else {
+                    cell.setAttribute("aria-label", etqFecha + ", disponible. Toque para ver las horas");
                     cell.onclick = () => {
-                        document.querySelectorAll(".cal-day.selected").forEach(c => c.classList.remove("selected"));
+                        document.querySelectorAll(".cal-day.selected").forEach(c => { c.classList.remove("selected"); c.removeAttribute("aria-pressed"); });
                         cell.classList.add("selected");
+                        cell.setAttribute("aria-pressed", "true");
                         state.fecha = date;
                         state.fechaTexto = date.toLocaleDateString("es-CL",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
                         document.getElementById("next2").disabled = false;
@@ -1676,6 +1741,8 @@
                 }
                 grid.appendChild(cell);
             }
+            const firstOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+            document.getElementById("prevMonth").disabled = (viewDate <= firstOfThisMonth);
         }
         document.getElementById("prevMonth").onclick = () => {
             const m = new Date(viewDate); m.setMonth(m.getMonth()-1);
@@ -1693,10 +1760,13 @@
             const horas = AGENDA.horariosPorDia[state.fecha.getDay()] || [];
             horas.forEach(h => {
                 const b = document.createElement("button");
+                b.type = "button";
                 b.className = "slot"; b.textContent = h;
+                b.setAttribute("aria-label", "Hora " + h);
                 b.onclick = () => {
-                    document.querySelectorAll(".slot.selected").forEach(s => s.classList.remove("selected"));
+                    document.querySelectorAll(".slot.selected").forEach(s => { s.classList.remove("selected"); s.removeAttribute("aria-pressed"); });
                     b.classList.add("selected");
+                    b.setAttribute("aria-pressed", "true");
                     state.hora = h;
                     document.getElementById("next3").disabled = false;
                 };
@@ -1722,27 +1792,63 @@
         });
 
         /* ===== PASO 5: Validar, resumir, enviar ===== */
+        let primerCampoInvalido = null;
+        function marcarCampo(groupId, inputId, errId, msg, mostrar){
+            const g = document.getElementById(groupId);
+            const inp = document.getElementById(inputId);
+            const err = document.getElementById(errId);
+            if(mostrar){
+                g.classList.add("invalid");
+                if(err && msg) err.textContent = msg;
+                inp.setAttribute("aria-invalid","true");
+                inp.setAttribute("aria-describedby", errId);
+                if(!primerCampoInvalido) primerCampoInvalido = inputId;
+            } else {
+                g.classList.remove("invalid");
+                inp.removeAttribute("aria-invalid");
+                inp.removeAttribute("aria-describedby");
+            }
+        }
         function validar(){
-            const campos = [
-                ["f-nombre","g-nombre","nombre"],
-                ["f-telefono","g-telefono","telefono"],
-                ["f-comuna","g-comuna","comuna"],
-                ["f-direccion","g-direccion","direccion"]
-            ];
+            primerCampoInvalido = null;
             let ok = true;
-            campos.forEach(([inputId, groupId, key]) => {
+            const obligatorios = [
+                ["f-nombre","g-nombre","g-nombre-err","nombre","Por favor escriba su nombre."],
+                ["f-telefono","g-telefono","g-telefono-err","telefono","Por favor escriba un teléfono de contacto."],
+                ["f-comuna","g-comuna","g-comuna-err","comuna","Por favor indique su comuna."],
+                ["f-direccion","g-direccion","g-direccion-err","direccion","Por favor indique su dirección."]
+            ];
+            obligatorios.forEach(([inputId, groupId, errId, key, msgVacio]) => {
                 const val = document.getElementById(inputId).value.trim();
-                if(val === ""){ document.getElementById(groupId).classList.add("invalid"); ok = false; }
-                else { document.getElementById(groupId).classList.remove("invalid"); state[key] = val; }
+                if(val === ""){ marcarCampo(groupId, inputId, errId, msgVacio, true); ok = false; }
+                else { marcarCampo(groupId, inputId, errId, null, false); state[key] = val; }
             });
-            state.email = document.getElementById("f-email").value.trim();
+            // Formato de teléfono (cuando no está vacío)
+            const tel = document.getElementById("f-telefono").value.trim();
+            if(tel !== "" && tel.replace(/\D/g,"").length < 9){
+                marcarCampo("g-telefono","f-telefono","g-telefono-err","Revise su teléfono: debe tener al menos 9 dígitos (ej: 9 1234 5678).", true);
+                ok = false;
+            }
+            // Correo (opcional, pero válido si se completa)
+            const email = document.getElementById("f-email").value.trim();
+            if(email !== "" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+                marcarCampo("g-email","f-email","g-email-err","Revise su correo: debe tener formato ejemplo@correo.com.", true);
+                ok = false;
+            } else {
+                marcarCampo("g-email","f-email","g-email-err", null, false);
+            }
+            state.email = email;
             state.motivo = document.getElementById("f-motivo").value.trim();
             return ok;
         }
 
         function goToConfirm(){
             if(!validar()){
-                document.querySelector(".form-group.invalid")?.scrollIntoView({behavior:"smooth", block:"center"});
+                if(primerCampoInvalido){
+                    const inp = document.getElementById(primerCampoInvalido);
+                    inp.focus({preventScroll:true});
+                    inp.scrollIntoView({behavior:"smooth", block:"center"});
+                }
                 return;
             }
             const box = document.getElementById("summaryBox");
@@ -1815,6 +1921,8 @@
             document.getElementById("confirmView").style.display = "none";
             document.getElementById("successView").style.display = "block";
             document.querySelectorAll("#stepper .dot").forEach(d => d.classList.add("done"));
+            const t = document.getElementById("successTitle");
+            if(t) t.focus({preventScroll:true});
         }
 
         function reiniciar(){ location.reload(); }
@@ -1893,22 +2001,28 @@
         };
 
         let servicioActual = null;
+        let focoPrevioServ = null;
         function abrirServicio(key){
             const s = SERVICIOS[key];
             if(!s) return;
             servicioActual = key;
+            focoPrevioServ = document.activeElement;
             var mu=document.getElementById("modalIcono-use"); mu.setAttribute("href","#i-"+s.icono); mu.setAttributeNS("http://www.w3.org/1999/xlink","xlink:href","#i-"+s.icono);
             document.getElementById("modalTitulo").textContent = s.titulo;
             document.getElementById("modalQue").textContent = s.que;
             document.getElementById("modalEjemplo").textContent = s.ejemplo;
             const msg = "Hola RECUPERA, me interesa el servicio de " + s.titulo + ". ¿Me pueden dar más información?";
             document.getElementById("modalWa").href = "https://wa.me/" + AGENDA.whatsapp + "?text=" + encodeURIComponent(msg);
-            document.getElementById("modalServicio").classList.add("open");
+            const ov = document.getElementById("modalServicio");
+            ov.classList.add("open");
             document.body.style.overflow = "hidden";
+            const cerrar = ov.querySelector(".modal-close");
+            if(cerrar) cerrar.focus();
         }
         function cerrarServicio(){
             document.getElementById("modalServicio").classList.remove("open");
             document.body.style.overflow = "";
+            if(focoPrevioServ && focoPrevioServ.focus){ focoPrevioServ.focus(); focoPrevioServ = null; }
         }
         function agendarServicio(){
             const s = SERVICIOS[servicioActual];
@@ -1941,6 +2055,8 @@
             if(!el) return;
             document.querySelectorAll(".vista").forEach(function(v){ v.classList.remove("activa"); });
             el.classList.add("activa");
+            /* Respaldo para navegadores sin :has(): fijamos display por JS */
+            document.querySelectorAll(".vista").forEach(function(v){ v.style.display = (v === el) ? "block" : "none"; });
             el.querySelectorAll(".reveal").forEach(function(r){ r.classList.add("visible"); });
             document.querySelectorAll(".nav-section a").forEach(function(a){ a.classList.remove("activo"); a.removeAttribute("aria-current"); });
             var link = document.querySelector('.nav-section a[href="' + h + '"]');
@@ -1970,6 +2086,17 @@
             entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add("visible"); revealObserver.unobserve(e.target); } });
         }, { threshold: 0.12 });
         document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
+        /* ===== Ocultar el botón flotante de WhatsApp al llegar al footer (no tapa enlaces) ===== */
+        (function(){
+            const flo = document.querySelector(".whatsapp-float");
+            const foo = document.querySelector("footer");
+            if(!flo || !foo || !("IntersectionObserver" in window)) return;
+            const obsFoot = new IntersectionObserver((entries) => {
+                entries.forEach(e => flo.classList.toggle("oculto", e.isIntersecting));
+            }, { threshold: 0.05 });
+            obsFoot.observe(foo);
+        })();
 
 
         /* ===== Menú móvil (abre por CSS :target). Bloqueo de scroll, foco y cierre con Escape ===== */
