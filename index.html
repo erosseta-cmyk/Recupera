@@ -652,6 +652,24 @@
         }
         .privacy-note i { font-size: 1.2rem; margin-top: 2px; }
 
+        /* Consentimiento (Ley 21.719) */
+        .consent-row {
+            display: flex; gap: 12px; align-items: flex-start;
+            background: var(--white); border: 1px solid var(--border);
+            border-radius: 12px; padding: 14px 16px; margin-bottom: 8px;
+            font-size: 0.98rem; color: var(--text-dark);
+        }
+        .consent-row input[type="checkbox"] {
+            width: 22px; height: 22px; margin-top: 1px; flex-shrink: 0; cursor: pointer;
+            accent-color: var(--brand-green);
+        }
+        .consent-row label { cursor: pointer; line-height: 1.5; }
+        .consent-row a { color: var(--brand-green-d); font-weight: 600; text-decoration: underline; }
+        .consent-warn { color: #B42318; font-size: 0.92rem; margin: 2px 4px 18px; display: none; }
+        .footer-legal { margin-bottom: 10px; }
+        .footer-legal a { color: #C3CCD9; text-decoration: underline; }
+        .footer-legal a:hover { color: var(--white); }
+
         /* Navegación inferior */
         .step-nav { display: flex; justify-content: space-between; gap: 14px; margin-top: 28px; }
         .step-nav .btn { flex: 1; }
@@ -1179,7 +1197,10 @@
             </div>
             <div><h3>Cobertura</h3><p>Atención a domicilio en Santiago. La cobertura exacta se coordina al agendar; consúltenos por WhatsApp.</p></div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2026 RECUPERA Kinesiología · Esteban Rosset · Reg. Salud N° 525653 · Santiago, Chile</p></div>
+        <div class="footer-bottom" id="legal">
+            <p class="footer-legal"><a href="#modalPrivacidad">Política de Privacidad</a></p>
+            <p>&copy; 2026 RECUPERA Kinesiología · Esteban Rosset · Reg. Salud N° 525653 · Santiago, Chile</p>
+        </div>
     </footer>
 
     <a href="https://wa.me/56979728587?text=Hola,%20quiero%20agendar%20una%20evaluación%20kinésica%20a%20domicilio%20con%20RECUPERA." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
@@ -1336,6 +1357,12 @@
                         <div>Usamos sus datos solo para contactarlo y coordinar su hora, a través de WhatsApp o correo. No los publicamos ni los vendemos. Puede pedirnos que los eliminemos cuando quiera.</div>
                     </div>
 
+                    <div class="consent-row">
+                        <input type="checkbox" id="f-consent">
+                        <label for="f-consent">He leído y acepto la <a href="#modalPrivacidad">Política de Privacidad</a> y autorizo el tratamiento de mis datos —incluida la información de salud que entregue— para coordinar mi atención.</label>
+                    </div>
+                    <p class="consent-warn" id="consentWarn" role="alert">Para continuar, marque la casilla de consentimiento.</p>
+
                     <div class="confirm-actions">
                         <button class="btn btn-wa" onclick="enviarWhatsApp()"><svg class="ic" aria-hidden="true"><use xlink:href="#i-whatsapp" href="#i-whatsapp"></use></svg> Confirmar por WhatsApp (recomendado)</button>
                         <button class="btn btn-ghost" id="btnCorreo" onclick="enviarCorreo()"><svg class="ic" aria-hidden="true"><use xlink:href="#i-mail" href="#i-mail"></use></svg> Enviar por correo</button>
@@ -1472,6 +1499,45 @@
         </div>
     </div>
 
+    <!-- ====================== POLÍTICA DE PRIVACIDAD (ventana :target, sin JS) ====================== -->
+    <div class="serv-modal" id="modalPrivacidad" role="dialog" aria-modal="true" aria-labelledby="priv-title">
+        <div class="serv-box">
+            <a href="#legal" class="serv-x" role="button" aria-label="Cerrar"><svg class="ic" aria-hidden="true"><use xlink:href="#i-x" href="#i-x"></use></svg></a>
+            <div class="serv-ic"><svg class="ic" aria-hidden="true"><use xlink:href="#i-shield" href="#i-shield"></use></svg></div>
+            <h3 id="priv-title">Política de Privacidad</h3>
+            <p style="color:var(--text-muted);font-size:0.95rem;">Cómo tratamos y protegemos sus datos personales, conforme a la Ley 21.719.</p>
+
+            <h4>1. Responsable de los datos</h4>
+            <p>Los datos personales que usted entrega a través de este sitio son tratados por <strong>Esteban Rosset</strong>, kinesiólogo (Reg. RNPI N° 525653), responsable del servicio RECUPERA (kinerecupera.cl), con domicilio en Santiago, Chile. Para cualquier consulta sobre sus datos: <a href="mailto:kinerecupera@gmail.com">kinerecupera@gmail.com</a>.</p>
+
+            <h4>2. Qué datos tratamos y con qué finalidad</h4>
+            <p>Recopilamos los datos que usted nos entrega al agendar o contactarnos: nombre, correo electrónico, teléfono/WhatsApp, dirección donde se realiza la visita, el servicio solicitado y la información clínica que decida compartir (motivo de consulta, orden médica, notas). Los usamos únicamente para coordinar y prestar la atención kinesiológica, agendar y confirmar sus sesiones, y mantener la continuidad de su tratamiento.</p>
+
+            <h4>3. Datos sensibles (salud)</h4>
+            <p>La información sobre su salud es un dato sensible. Solo la tratamos con su <strong>consentimiento expreso</strong>, manifestado al marcar la casilla correspondiente al momento de agendar, y exclusivamente para los fines de su atención. Puede retirar ese consentimiento en cualquier momento escribiéndonos.</p>
+
+            <h4>4. Base que nos habilita</h4>
+            <p>Tratamos sus datos de contacto para gestionar su reserva y atención (relación contractual y su solicitud), y sus datos de salud sobre la base de su consentimiento expreso.</p>
+
+            <h4>5. Con quién se comparten</h4>
+            <p>Para agendar usamos <strong>Cal.com</strong>, que actúa como encargado y procesa los datos en servidores ubicados en <strong>Estados Unidos</strong> (transferencia internacional, regulada por su acuerdo de tratamiento de datos). Si usted nos contacta por <strong>WhatsApp</strong>, ese mensaje se procesa en la plataforma de Meta. No vendemos ni cedemos sus datos a terceros con fines comerciales.</p>
+
+            <h4>6. Cuánto tiempo los conservamos</h4>
+            <p>La información clínica forma parte de su ficha y, conforme a la Ley 20.584, se conserva por un período mínimo de <strong>15 años</strong> desde su última atención, transcurrido el cual se elimina. Los datos de contacto de quienes no concretan una atención se eliminan dentro de un plazo razonable (12 meses).</p>
+
+            <h4>7. Sus derechos</h4>
+            <p>Puede solicitar en cualquier momento: acceso, rectificación, supresión, oposición, portabilidad y bloqueo de sus datos, escribiendo a <a href="mailto:kinerecupera@gmail.com">kinerecupera@gmail.com</a>. Respondemos dentro de los plazos legales (30 días corridos). Si no le respondemos o rechazamos su solicitud, puede reclamar ante la Agencia de Protección de Datos Personales.</p>
+
+            <h4>8. Seguridad</h4>
+            <p>Aplicamos medidas razonables para proteger su información frente a accesos no autorizados, pérdida o alteración.</p>
+
+            <div class="serv-cta">
+                <a class="btn btn-ghost" href="#legal">Cerrar</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ventana emergente de servicios (detalle dinámico por JS) -->
     <div class="modal-overlay" id="modalServicio" onclick="if(event.target===this) cerrarServicio()">
         <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
             <div class="modal-head">
@@ -1871,7 +1937,20 @@
         function capitalizar(t){ return t ? t.charAt(0).toUpperCase()+t.slice(1) : t; }
         function escapar(t){ const d=document.createElement("div"); d.textContent=t; return d.innerHTML; }
 
+        function consentimientoOk(){
+            const c = document.getElementById("f-consent");
+            const w = document.getElementById("consentWarn");
+            if(c && !c.checked){
+                if(w) w.style.display = "block";
+                c.focus();
+                return false;
+            }
+            if(w) w.style.display = "none";
+            return true;
+        }
+
         function enviarWhatsApp(){
+            if(!consentimientoOk()) return;
             let msg = "Hola RECUPERA, quiero agendar una hora:\n";
             msg += "• Servicio: " + state.servicio + "\n";
             msg += "• Día: " + capitalizar(state.fechaTexto) + "\n";
@@ -1890,6 +1969,7 @@
         }
 
         async function enviarCorreo(){
+            if(!consentimientoOk()) return;
             const btn = document.getElementById("btnCorreo");
             btn.disabled = true; btn.innerHTML = '<svg class="ic ic-spin" aria-hidden="true"><use xlink:href="#i-spinner" href="#i-spinner"></use></svg> Enviando...';
             try {
